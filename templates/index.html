@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+{% load static %}
+<div class="p-md-6 mb-5 text-black rounded custom-image" style="padding:5rem">
+  {% comment %} background:#dfdce3;color:black;padding:5rem; {% endcomment %}
+  <div class="col-md-6 px-0">
+    <h1 class="display-5 fw-bold text-white">Welcome To Online Tutorial</h1>
+    <p class="lead my-3 text-black text-white">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+    <p class="lead mb-0">
+      <a href="{% url 'myapp:allcourse' %}" class="btn btn-warning text-white">Course</a>
+      <a href="" class="btn btn-warning text-white">Explore</a></p>
+    </div>
+  </div>
+
+  <!--Counter Course-->
+  <section class="py-0 py-xl-5">
+	<div class="container">
+		<div class="row g-4">
+			<!-- Counter item -->
+			<div class="col-sm-6 col-xl-3">
+				<div class="d-flex justify-content-center align-items-center p-4 bg-warning bg-opacity-15 rounded-3">
+					<span class="display-6 lh-1 text-warning mb-0"><i class="fas fa-tv text-dark"></i></span>
+					<div class="ms-4 h6 fw-normal mb-0">
+						<div class="d-flex">
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{{total_count}}</h5>
+						</div>
+						<p class="mb-0">Online Courses</p>
+					</div>
+				</div>
+			</div>
+			<!-- Counter item -->
+			<div class="col-sm-6 col-xl-3">
+				<div class="d-flex justify-content-center align-items-center p-4 bg-primary bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-blue mb-0"><i class="fas fa-user-tie"></i></span>
+					<div class="ms-4 h6 fw-normal mb-0">
+						<div class="d-flex">
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-delay="200" data-purecounter-duration="0">{{user_count}}</h5>
+							<span class="mb-0 h5">+</span>
+						</div>
+						<p class="mb-0">Total Student</p>
+					</div>
+				</div>
+			</div>
+			<!-- Counter item -->
+			<div class="col-sm-6 col-xl-3">
+				<div class="d-flex justify-content-center align-items-center p-4 bg-success bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-purple mb-0"><i class="fas fa-user-graduate"></i></span>
+					<div class="ms-4 h6 fw-normal mb-0">
+						<div class="d-flex">
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60" data-purecounter-delay="200" data-purecounter-duration="0">{{course_count}}</h5>
+						</div>
+						<p class="mb-0">Free Course</p>
+					</div>
+				</div>
+			</div>
+			<!-- Counter item -->
+			<div class="col-sm-6 col-xl-3">
+				<div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-info mb-0"><i class="fas fa-certificate text-dark"></i></span>
+					<div class="ms-4 h6 fw-normal mb-0">
+						<div class="d-flex">
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300" data-purecounter-duration="0">{{premium_count}}</h5>
+						</div>
+						<p class="mb-0">Certified Courses</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--Counter Course End-->
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 mx-auto">
+                  <h2 class="text-center fs-1 mx-auto">Premium Course</h2>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+            <div id="new" class="tab-pane fade show p-0 active">
+              <div class="container">
+                <div class="row g-4">
+                  {% for premium in premium %}
+                    <div class="col-lg-4 col-md-6 shadow">
+                        <div class="product-item">
+                            <div class="position-relative bg-light">
+                                <img class="img-fluid w-100" src="{{premium.course_thumbnail.url}}" alt="">
+                                <div class="bg-danger rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">-{{premium.course_discount}}%</div>
+                            </div>
+                            <div class="text-center p-4">
+                                <h4 class="d-block  mb-2" href="">{{premium.course_title}}</h4>
+                                <h6>{{premium.course_about}}</h6>
+                                <span class="text-primary me-1">${{premium.discount}}</span>
+                                <span class="text-body text-decoration-line-through">Rs.{{premium.course_price}}</span>
+                            </div>
+                            <div class="d-flex border-top">
+                                    <a class="text-decoration-none p-3 text-center mx-auto" href="{% url 'premium:overview' premium.course_slug %}"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
+                    <div class="col-12 text-center my-4">
+                        <a class="btn btn-primary rounded-pill py-3 px-5 text-white" href="{% url 'premium:home' %}">Browse More</a>
+                    </div>
+<!-- ---------------------------------------------------------freee-------------------------------------- -->
+  <!--
+  
+  -->
+<div class="container mx-auto">
+<h2 class="text-center fs-1 mx-auto">Free Course</h2>
+<p class="mb-0 text-center mx-auto">Explore couses with most helpful tools.</p>
+<div class="d-inline-flex flex-wrap">
+{% for course in course %}
+<div class="d-flex mx-4 shadow-lg card mt-2 rounded-2x1" style="width: 19rem;">
+  <img src="{{course.course_thumbnail.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{course.course_title}}</h5>
+    <p class="card-text">{{course.course_about}}</p>
+    <a href="{% url 'myapp:cours' course.course_slug %}" class="btn btn-primary text-white">View More</a>
+  </div>
+</div>
+  {% endfor %}
+</div>
+  </div>
+<div class="col-12 text-center my-4">
+                        <a class="btn btn-primary rounded-pill py-3 px-5 text-white" href="{% url 'myapp:allcourse' %}">Browse More</a>
+                    </div>
+  <div class="container my-4">
+<div class="row">
+			<div class="col-12">
+				<div class="bg-info p-4 p-sm-5 rounded-3">
+					<div class="row position-relative">
+						<!-- Svg decoration -->
+						<figure class="fill-white opacity-1 position-absolute top-50 start-0 translate-middle-y">
+							<svg width="141px" height="141px">
+								<path d="M140.520,70.258 C140.520,109.064 109.062,140.519 70.258,140.519 C31.454,140.519 -0.004,109.064 -0.004,70.258 C-0.004,31.455 31.454,-0.003 70.258,-0.003 C109.062,-0.003 140.520,31.455 140.520,70.258 Z"></path>
+							</svg>
+						</figure>
+						<!-- Action box -->
+						<div class="col-11 mx-auto position-relative">
+							<div class="row align-items-center">
+								<!-- Title -->
+								<div class="col-lg-7">
+									<h3 class="text-white">Become an Instructor!</h3>
+									<p class="text-white mb-3 mb-lg-0">Speedily say has suitable disposal add boy. On forth doubt miles of child. Exercise joy man children rejoiced. Yet uncommonly his ten who diminution astonished.</p>
+								</div>
+								<!-- Content and input -->
+								<div class="col-lg-5 text-lg-end">
+									<a href="{% url 'myapp:contact' %}" class="btn btn-outline-warning mb-0 text-white">Start Teaching Today</a>
+								</div>
+							</div>
+						</div>
+					</div> <!-- Row END -->
+				</div>
+			</div>
+		</div>
+  </div>
+
+
+
+  <div class="container my-5">
+    <h2 class="text-center my-5">Latest Blog</h2>
+    <div class="row mb-2">
+    {% for allblog in allblog %}
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Online Tutorial</strong>
+          <h3 class="mb-0">{{allblog.blog_title}}</h3>
+          <div class="mb-1 text-muted">{{allblog.created_at|date}}</div>
+          <p class="card-text mb-auto">{{allblog.blog_about|safe|truncatechars:54}}</p>
+          <a href="{% url 'myapp:blogs_detail' allblog.slug %}" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          {% comment %} <img src="{{allblog.thumbnail.url}}" alt="" srcset=""> {% endcomment %}
+
+        </div>
+      </div>
+    </div>
+   {% endfor %} 
+  </div>
+  </div>
+  <div class="col-12 text-center my-4">
+                        <a class="btn btn-primary rounded-pill py-3 px-5 text-white" href="{% url 'myapp:blogapp' %}">Browse More</a>
+                    </div>
+<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top text-white"><i class="fa-solid fa-angles-up">^</i></a>
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Premium Course{% endblock title %}
+{% block content %}
+<div class="container d-flex mx-auto my-4 shadow-lg">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Course Name</th>
+      <th scope="col">Course Price</th>
+      <th scope="col">Course Discount Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{premium.course_title}}</td>
+      <td>{{premium.course_price}} (-{{premium.course_discount}}% off)</td>
+      <td>{{premium.discount}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">Payble Amount:</td>
+        {% if is_pay %}
+        <td>Already Pay</td>
+        {% else %}
+      <td><a href="" id="rzp-button1" class="btn btn-primary text-white">Pay now</a></td>
+      {% endif %}
+    </tr>
+  </tbody>
+</table>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_BvgJJjTcwtKxoX",
+    "amount": "{{response.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Online E-learning Platform",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{response.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //"callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+    //"callback_url":"http://127.0.0.1:8000/success/",
+    "callback_url":"{% url 'myapp:success' %}",
+    //"prefill": {
+        //"name": "Gaurav Kumar",
+        //"email": "gaurav.kumar@example.com",
+        //"contact": "9999999999"
+    //},
+    "notes": {
+        "address": "Online E-learning Platform"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% endblock content %}

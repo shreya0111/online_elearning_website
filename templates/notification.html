@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            {% include 'dashboard_sidebar.html' %}
+            
+            <!-- -------------dashboard------------ -->
+            {% if success or fail %}
+            <div class="col py-3" id="dash">
+                {% for success in success %}
+                <div class="alert alert-success" role="alert">
+                    Hey {{success.user.first_name}} Yours {{success.course}} course successfully purchased.
+                </div>
+                {% endfor %}
+                {% for fail in fail %}
+                <div class="alert alert-warning" role="alert">
+                    Sorry! {{fail.user.first_name}} yours {{fail.course}} course payment failed.
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center display-6">You have no notifications</div>
+{% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

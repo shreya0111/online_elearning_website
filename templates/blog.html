@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Blog{% endblock title %}
+{% block content %}
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header " >
+        <div class="container">
+            <h1>Blog Grid</h1>
+            <!-- ai khaner nav ta change korte paris nahole site r nav r css r sathe mix hoa gandogol hote pare -->
+            <nav aria-label="breadcrumb animated">  
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a class="text-body text-decoration-none" href="{% url 'myapp:home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-body text-decoration-none" href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-dark active" aria-current="page">Our Blogs</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Blog Start -->
+    <div class="container-xxl py-6">
+        <div class="container ">
+            <div class="section-header text-center mx-auto mb-5" style="max-width: 500px;">
+                <h1 class="display-5 mb-3">Latest Blog</h1>
+                <p>Hey whatsup bandhura amra chole asachi amader very first blog a ...... lets see the shits inside of the artical</p>
+            </div>
+            <div class="row g-4">
+    <!-- -------------------------------------------------blog and row suru---------------------------------------------------------- -->
+                {% for i in b %}
+                <div class="col-lg-4 col-md-6 shadow-lg" >
+                    <div class="container hov">
+                    <img class="img-fluid" src="{{i.thumbnail.url}}" alt="">
+                    <div class="bg-light p-4">
+                        <a class="d-block h4 lh-base mb-4 text-decoration-none" href="{% url 'myapp:blogs_detail' i.slug %}">{{ i.blog_title }}</a>
+                        <div class="text-muted border-top pt-4">
+                            <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Online Tutorial</small>
+                            <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>{{ i.created_at|date }}</small>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+    <!------------------------------------------------------------------------------------------------------------------------  -->
+<div class="col-12 text-center">
+    <a class="btn btn-primary rounded-pill py-3 px-5 text-white" href="">More</a>
+</div>    
+<!-- ---end of the row----------------------------------- -->
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+
+
+    <!-- Footer Start -->
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top text-white"><i class="#">^</i></a>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+{% endblock content %}

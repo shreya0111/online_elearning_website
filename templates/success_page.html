@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Success{% endblock title %}
+{% block content %}
+{% if status == "Success" %}
+<div class="container shadow-lg p-4 my-4">
+<div class="fs-1 mx-auto text-center my-4">You are successfully purchased your Course</div>
+<img src="{% static '/image/done.webp' %}" class="img-fluid mx-auto text-center d-block" style="width:80px;height:80px;">
+<blockquote class="blockquote text-center">
+  <p class="mb-0">Go to dashboard and enjoy your course..</p>
+</blockquote>
+<div class="container text-center my-4">
+    <a href="{% url 'myapp:home' %}" class="btn btn-success">Home</a>
+</div>
+</div>
+{% elif status == "Failure" %}
+<div class="container shadow-lg p-4 my-4">
+<div class="fs-1 mx-auto text-center my-4">You are failed to purchased the Course</div>
+<img src="{% static '/image/not_done.png' %}" class="img-fluid mx-auto text-center d-block" style="width:80px;height:80px;">
+<blockquote class="blockquote text-center">
+  <p class="mb-0">Go to home and purchased your course..</p>
+</blockquote>
+<div class="container text-center my-4">
+    <a href="{% url 'myapp:home' %}" class="btn btn-danger">Home</a>
+</div>
+</div>
+{% else %}
+<div class="container shadow-lg p-4 my-4">
+<div class="fs-1 mx-auto text-center my-4">You are successfully purchased your Course</div>
+<img src="{% static '/image/done.webp' %}" class="img-fluid mx-auto text-center d-block" style="width:80px;height:80px;">
+<blockquote class="blockquote text-center">
+  <p class="mb-0">Go to dashboard and enjoy your course..</p>
+</blockquote>
+<div class="container text-center my-4">
+    <a href="{% url 'myapp:home' %}" class="btn btn-success">Home</a>
+</div>
+</div>
+{% endif %}
+{% endblock content %}

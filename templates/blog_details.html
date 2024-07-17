@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% comment %} {% block title %}Blog{% endblock title %} {% endcomment %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container-fluid">
+                <h3 class="my-2 text-center">{{b.blog_title}}</h3>
+                <img src="{{b.thumbnail.url}}" class="img-fluid my-5 mx-auto d-block">
+
+                <div class="container-fluid my-4">
+                    <h3>Content: </h3>
+                    {{b.blog_content|safe}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container-fluid my-3">
+                <div class="h3">Latest Course</div>
+
+                {% for course in course %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{course.course_thumbnail.url}}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <a href="{% url 'myapp:cours' course.course_slug %}"
+                                    class="card-title text-decoration-none"
+                                    style="font-size:20px;color:black;font-weight:bold;cursor: pointer;">{{course.course_title}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="container-fluid my-3">
+                <div class="h3">Latest Blog</div>
+
+                {% for allblog in allblog %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{allblog.thumbnail.url}}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <a href="{% url 'myapp:blogs_detail' allblog.slug %}"
+                                    class="card-title text-decoration-none"
+                                    style="font-size:20px;color:black;font-weight:bold;cursor: pointer;">{{allblog.blog_title}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            {% include 'dashboard_sidebar.html' %}
+            
+            <!-- -------------dashboard------------ -->
+            <div class="col py-3" id="dash">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-header">Purchased</div>
+                            <div class="contaner card-body align-items-center justify-content-between">
+                                {% if purchase %}
+                                {% for purchase in purchase %}
+                               <li><a herf = "#">{{purchase.course}} </a></li>
+                               {% endfor %}
+                               {% else %}
+                               <div>You don't have any course</div>
+                               {% endif %}
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link text-decoration-none" href="{% url 'myapp:purchased' %}">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-warning text-white mb-4">
+                            <div class="card-header">In Progress</div>
+                            <div class="contaner card-body align-items-center justify-content-between">
+                                <li><a herf = "#">Data Science </a></li> 
+                                <li><a herf = "#">Pythone </a></li> 
+                                <li><a herf = "#">Java </a></li> 
+                             </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link text-decoration-none" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-header">Completed</div>
+                            <div class="contaner card-body align-items-center justify-content-between">
+                                <li><a herf = "#">Data Science </a></li> 
+                                <li><a herf = "#">Pythone </a></li> 
+                                <li><a herf = "#">Java </a></li> 
+                             </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link text-decoration-none" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6" >
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-header">Notifications</div>
+                            <div class="contaner card-body align-items-center justify-content-between">
+                                <li><a herf = "#">You have completed the data science course succesfully</a> </a></li> 
+                                <li><a herf = "#">Assignment report has been succesfully upadated </a></li> 
+                                <li><a herf = "#">Complete your profile </a></li> 
+                             </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link text-decoration-none" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-area me-1"></i>
+                                Current Course
+                            </div>
+                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar me-1"></i>
+                                Time Spent
+                            </div>
+                            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Discover More
+                    </div>
+                    <!-- everything else -->
+                </div>
+                <!-- ------dashboard end------- -->
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+        {% comment %} 
+        <script src="js/scripts.js"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
+</html> {% endcomment %}

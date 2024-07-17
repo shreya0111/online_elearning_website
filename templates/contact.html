@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock title %}
+{% block content %}
+    <div class="container py-4">
+
+        <!-- Bootstrap 5 starter form -->
+        <form id="contactForm" class="text-center" method="post" border border-light p-5" action="/contact/">
+            {% csrf_token %}
+            <p class="h2 mb-4 font-weight-bold" style="font-family:Times New Roman">Contact us</p>
+
+            <!-- Name -->
+            <input type="text" id="defaultContactFormName" class="form-control mb-4" name="name" placeholder="Name">
+
+            <!-- Email -->
+            <input type="email" id="defaultContactFormEmail" class="form-control mb-4" name="email" placeholder="E-mail">
+
+            <!-- Message -->
+            <div class="form-group">
+                <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" name="message" rows="3" placeholder="Message"></textarea>
+            </div>
+
+            {% comment %} <!-- Copy -->
+            <div class="custom-control custom-checkbox mb-4">
+                <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy" name='check'>
+                <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
+            </div> {% endcomment %}
+
+            <!-- Send button -->
+            <button class="btn btn-outline-info btn-lg my-4" type="submit" style="font-family:Times New Roman">Send</button>
+        </form>
+    </div>
+{% endblock content %}

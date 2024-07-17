@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Failed{% endblock title %}
+{% block content %}
+<div class="container shadow-lg p-4 my-4">
+<div class="fs-1 mx-auto text-center my-4">You Are Failed To Purchased Your Course</div>
+<img src="{% static '/image/not_done.png' %}" class="img-fluid mx-auto text-center d-block" style="width:80px;height:80px;">
+<blockquote class="blockquote text-center">
+  <p class="mb-0">Payment again to purchased your course.</p>
+</blockquote>
+<div class="container text-center my-4">
+    <a href="" class="btn btn-warning">Home</a>
+</div>
+</div>
+{% endblock content %}

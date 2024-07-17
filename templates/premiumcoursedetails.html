@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block title %}Premium{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row my-2">
+        <div class="col-sm-8">
+            {% comment %} {% if video %}
+                <div class="ratio ratio-16x9">
+                    <iframe src="//www.youtube.com/embed/{{video.video_id}}?autoplay=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+            {% endif %} {% endcomment %}
+                <div class="container-fluid mx-3 my-2">
+                    <h3>{{premium_course_all.title}}</h3>
+                    {{premium_course_all.article | safe}}
+                </div>
+                <nav aria-label="Page navigation example">
+                <ul class="pagination d-flex justify-content-between">
+                    <li class="page-item">
+                        {% if prev_page %}
+                    <a class="page-link btn btn-primary" href="{% url 'premium:premium_course_details' purchase.course.course_slug prev_page.slug %}" aria-label="Previous">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                    {% endif %}
+                    </li>
+                    <li class="page-item float-end">
+                        {% if next_page %}
+                    <a class="page-link btn btn-primary" href="{% url 'premium:premium_course_details' purchase.course.course_slug next_page.slug %}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                    {% endif %}
+                    </li>
+                </ul>
+</nav>
+        </div>
+        <div class="col-sm-4">
+            <h5>Premium Course: {{purchase.course.course_title}}</h5>
+
+            <div class="list-group overflow-auto overflow-x-hidden" style="height:30rem">
+            {% for premium_course in premium_course %}
+            {% url 'premium:premium_course_details' purchase.course.course_slug premium_course.slug as details %}
+                <a type="button" href="{{details}}"
+                    class="list-group-item my-2 shadow p-3 mb-3 bg-white rounded list-group-item-action" {% if request.path == details %}style="color:#0d6efd"{% endif %}>
+                    {{premium_course.title}}
+            </a>
+            {% endfor %}
+            <!--quiz start-->
+            {% if exam %}
+                        <a type="button" class="list-group-item my-2 shadow p-3 mb-3 bg-white rounded list-group-item-action" data-bs-toggle="modal" data-bs-target="#eampleModal">
+              Result
+            </a>
+
+            <div class="modal fade" id="eampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Result</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <ol class="list-group list-group-numbered">
+   <li class="list-group-item">Percentage: {{exm.percentage}}%</li>
+   <li class="list-group-item">Pass: {% if exm.is_pass %}True {% else %}Fail{% endif %}</li>
+   <li class="list-group-item">Give us feedback and wait for verfication. After verification you will get your certificate</li>
+</ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+            {% else %}
+            <a type="button" class="list-group-item my-2 shadow p-3 mb-3 bg-white rounded list-group-item-action" data-bs-toggle="modal" data-bs-target="#eampleModal">
+              Quiz
+            </a>
+
+            <div class="modal fade" id="eampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Course Instruction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ol class="list-group list-group-numbered">
+  <li class="list-group-item">Answer all the question to get pass marks</li>
+  <li class="list-group-item">Passing marks is equal or greater than 60</li>
+</ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Close</button>
+        <a href="{% url 'quizapp:quizhome' premium.course_slug %}" type="button" class="btn btn-primary text-white">Procced</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<!--Quiz End-->
+{% if not f %}
+            <!-- Button trigger modal -->
+<a type="button" class="list-group-item my-2 shadow p-3 mb-3 bg-white rounded list-group-item-action" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Feedback
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Feedback Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+            <div class="modal-body">
+        <form method="post">
+                {% csrf_token %}
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">How likely you would like to recommand us to your friends?</label>
+                <div class="rating-input-wrapper d-flex justify-content-between mt-2">
+                  <label><input type="radio" name="rating" value="1"/><span class="border rounded px-3 py-2">1</span></label>
+                  <label><input type="radio" name="rating" value="2"/><span class="border rounded px-3 py-2">2</span></label>
+                  <label><input type="radio" name="rating" value="3"/><span class="border rounded px-3 py-2">3</span></label>
+                  <label><input type="radio" name="rating" value="4"/><span class="border rounded px-3 py-2">4</span></label>
+                  <label><input type="radio" name="rating" value="5"/><span class="border rounded px-3 py-2">5</span></label>
+                </div>
+                <div class="rating-labels d-flex justify-content-between mt-1">
+                  <label>Very unlikely</label>
+                  <label>Very likely</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="input-two">Tell me about your experience</label>
+                <textarea class="form-control" name="say_something" id="input-two" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary text-white">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% comment %} {% else %}
+Hii
+{% endif %} {% endcomment %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

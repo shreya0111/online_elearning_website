@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="hero-section" style="background: rgb(58,90,180);
+  background: linear-gradient(56deg, rgba(58,90,180,1) 0%, rgba(255,41,41,0.606467623670562) 100%, rgba(252,176,69,0.04064129313834908) 100%);">
+			<div class="hero-mask">
+			</div><!--//hero-mask-->
+      
+			<div class="container text-center py-5">
+				<div class="single-col-max mx-auto">
+					<h2 class="hero-heading mb-5">
+						<span class="brand mb-4 d-block h1">{{premium.course_title}}</span>
+					    <span class="desc d-block text-muted">{{premium.course_about}}</span>
+				    </h2>
+					
+					{% if enrolled %}
+					<a href="{% url 'myapp:purchased' %}" class="btn btn-primary btn-lg scrollto text-white">Enrolled</a>
+					{% else %}
+					<div class="text-center mb-5">
+						<a href="{% url 'premium:premium_course' premium.course_slug %}" class="btn btn-primary btn-lg scrollto text-white">Enroll Now</a>
+					</div>
+					{% endif %}
+					<div class="hero-summary">
+						<div class="row">
+							<div class="item col-4">
+								<div class="summary-desc mb-1"><i class="icon fas fa-video me-2"></i>Content</div>
+								<h4 class="summary-heading"><span class="desc">Videos</span></h4>
+								
+							</div><!--//col-->
+							<div class="item col-4">
+								<div class="summary-desc mb-1"><i class="icon fas fa-clock me-2"></i>Duration</div>
+								<h4 class="summary-heading">72 <span class="desc">Hours</span></h4>
+								
+							</div><!--//col-->
+							<div class="item col-4">
+								<div class="summary-desc mb-1"><i class="icon fas fa-user-circle me-2"></i>Access</div>
+								<h4 class="summary-heading">Lifetime</h4>
+								
+							</div><!--//col-->
+						</div><!--//row-->
+					</div><!--//hero-summary-->
+				</div><!--//single-col-max-->
+			</div><!--//container-->
+			
+		</section><!--//hero-section-->
+
+    <div class="container ">
+    </div>
+<div class="container">
+	{{premium.what_we_learn|safe}}
+</div>
+<div class="container">
+    <h2>Comments</h2>
+    {% if feedback %}
+<div class="card">
+	    <div class="card-body">
+	        <div class="row">
+                {% for feedback in feedback %}
+        	    <div class="col-md-2">
+        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+        	        <p class="text-secondary text-center">{{feedback.date|date:"d M Y"}}</p>
+        	    </div>
+        	    <div class="col-md-10">
+        	        <p>
+        	            <a class="float-left text-decoration-none"><strong>{{feedback.user.first_name}} {{feedback.user.last_name}}</strong></a>
+        	            <span class="float-right">{% if feedback.star > 4 %}<i class="text-warning fa fa-star"></i>{% endif %}</span>
+                        <span class="float-right">{% if feedback.star > 3 %}<i class="text-warning fa fa-star"></i>{% endif %}</span>
+        	            <span class="float-right">{% if feedback.star > 2 %}<i class="text-warning fa fa-star"></i>{% endif %}</span>
+        	            <span class="float-right">{% if feedback.star > 1 %}<i class="text-warning fa fa-star"></i>{% endif %}</span>
+        	            <span class="float-right">{% if feedback.star > 0 %}<i class="text-warning fa fa-star"></i>{% endif %}</span>
+
+        	       </p>
+        	       <div class="clearfix"></div>
+        	        <p>{{feedback.say_something}}</p>
+        	    </div>
+	        </div>
+            {% endfor %}
+	    </div>
+	</div>
+    {% endif %}
+</div>
+
+
+
+
+	<div class="sections-wrapper">
+	        
+	        <div id="section-more" class="section section-related py-5">
+		        <div class="container">
+			        <h3 class="section-title mb-5">More Courses You May Like</h3>
+              <div class="row g-4">
+                <div class="col-lg-4 col-md-6 shadow">
+                    <div class="product-item">
+                        <div class="position-relative bg-light">
+                            <img class="img-fluid w-100" src="Python-1.jpg" alt="">
+                            <div class="bg-danger rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h4 class="d-block  mb-2" href="">Pythone</h4>
+                            <h6>Learn Pyhone from scratch</h6>
+                            <span class="text-primary me-1">$19.00</span>
+                            <span class="text-body text-decoration-line-through">$29.00</span>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="w-50 text-center border-end py-2">
+                                <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                            </small>
+                            <small class="w-50 text-center py-2">
+                                <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Enroll Now!</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 shadow">
+                    <div class="product-item">
+                        <div class="position-relative bg-light">
+                            <img class="img-fluid w-100" src="Python-1.jpg" alt="">
+                            <div class="bg-danger rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h4 class="d-block  mb-2" href="">Pythone</h4>
+                            <h6>Learn Pyhone from scratch</h6>
+                            <span class="text-primary me-1">$19.00</span>
+                            <span class="text-body text-decoration-line-through">$29.00</span>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="w-50 text-center border-end py-2">
+                                <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                            </small>
+                            <small class="w-50 text-center py-2">
+                                <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Enroll Now!</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 shadow">
+                    <div class="product-item">
+                        <div class="position-relative bg-light">
+                            <img class="img-fluid w-100" src="Python-1.jpg" alt="">
+                            <div class="bg-danger rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h4 class="d-block  mb-2" href="">Pythone</h4>
+                            <h6>Learn Pyhone from scratch</h6>
+                            <span class="text-primary me-1">$19.00</span>
+                            <span class="text-body text-decoration-line-through">$29.00</span>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="w-50 text-center border-end py-2">
+                                <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                            </small>
+                            <small class="w-50 text-center py-2">
+                                <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Enroll Now!</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+                <div class="col-12 text-center my-4">
+                    <a class="btn btn-primary rounded-pill py-3 px-5" href="#">Browse More</a>
+                </div>
+
+
+ {% endblock content %}

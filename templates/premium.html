@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Premium{% endblock title %}
+{% block content %}
+<div class="container">
+              <div class="row">
+                <div class="col-md-6 mx-auto">
+                  <h2 class="text-center fs-1 mx-auto">Premium Course</h2>
+                  <p class="mb-0 text-center mx-auto">Explore couses with most helpful tools.</p>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+            <div id="new" class="tab-pane fade show p-0 active">
+              <div class="container">
+                <div class="row g-4">
+                  {% for premium in premium %}
+                    <div class="col-lg-4 col-md-6 shadow">
+                        <div class="product-item">
+                            <div class="position-relative bg-light">
+                                <img class="img-fluid w-100" src="{{premium.course_thumbnail.url}}" alt="">
+                                <div class="bg-danger rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">-{{premium.course_discount}}%</div>
+                            </div>
+                            <div class="text-center p-4">
+                                <h4 class="d-block  mb-2" href="">{{premium.course_title}}</h4>
+                                <h6>{{premium.course_about}}</h6>
+                                <span class="text-primary me-1">${{premium.discount}}</span>
+                                <span class="text-body text-decoration-line-through">Rs.{{premium.course_price}}</span>
+                            </div>
+                            <div class="d-flex border-top">
+                                    <a class="text-decoration-none p-3 text-center mx-auto" href="{% url 'premium:overview' premium.course_slug %}"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Search | {{query}}{% endblock title %}
+{% block content %}
+{% comment %} {% if query %}
+<h3 class="mx-4">Search:{{query}}</h3>
+
+<div class="container mx-auto">
+<div class="d-inline-flex flex-wrap">
+{% for course in searchfilter %}
+<div class="d-flex mx-4 card mt-2 rounded-2x1" style="width: 19rem;">
+  <img src="{{course.course_thumbnail.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{course.course_title}}</h5>
+    <p class="card-text">{{course.course_about}}</p>
+    <a href="{% url 'myapp:cours' course.course_slug %}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+  {% endfor %}
+</div>
+  </div>
+{% else %}
+<h1 class="text-center">Not found</h1>
+{% endif %} {% endcomment %}
+
+{% if searchfilter|length < 1 %}
+<div class="row">
+  <div class="col-md-8 mx-auto">
+<p>
+Your search - {{ query }} - did not match any documents.<br><br>
+
+Suggestions:<br><br>
+
+Make sure that all words are spelled correctly.<br>
+<ul>
+<li>Try different keywords.</li>
+<li>Try more general keywords.</li>
+<li>Try fewer keywords.</li>
+</ul>
+</p>
+</div>
+</div>
+{% else %}
+{% endif %}
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+          {% for course in searchfilter %}
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{course.course_thumbnail.url}}"></div>
+                <div class="col-md-6 mt-1">
+                    <h5>{{course.course_title}}</h5>
+                    {% comment %} <div class="d-flex flex-row">
+                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span class="dot"></span><span>Light weight</span><span class="dot"></span><span>Best finish<br></span></div>
+                    <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span class="dot"></span><span>For men</span><span class="dot"></span><span>Casual<br></span></div> {% endcomment %}
+                    <p class="text-justify text-truncate para mb-0">{{course.course_about|truncatechars:130}}<br><br></p>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <h6 class="text-success">Free shipping</h6>
+                    <div class="d-flex flex-column mt-4"><a href="{% url 'myapp:cours' course.course_slug %}" class="text-white btn btn-primary btn-sm" type="button">Details</a></div>
+                </div>
+            </div>
+              {% endfor %}
+          {% for search_premium in search_premium %}
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{search_premium.course_thumbnail.url}}"></div>
+                <div class="col-md-6 mt-1">
+                    <h5>{{search_premium.course_title}}</h5>
+                    {% comment %} <div class="d-flex flex-row">
+                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span class="dot"></span><span>Light weight</span><span class="dot"></span><span>Best finish<br></span></div>
+                    <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span class="dot"></span><span>For men</span><span class="dot"></span><span>Casual<br></span></div> {% endcomment %}
+                    <p class="text-justify text-truncate para mb-0">{{course.course_about|truncatechars:130}}<br><br></p>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <h4 class="mr-1">Rs.{{search_premium.discount}}</h4><span class="strike-text text-decoration-line-through">Rs.{{search_premium.course_price}}</span>
+                    </div>
+                    <h6 class="text-success">Premium Course</h6>
+                    <div class="d-flex flex-column mt-4"><a href="{% url 'premium:overview' search_premium.course_slug %}" class="text-white btn btn-primary btn-sm" type="button">Details</a></div>
+                </div>
+            </div>
+              {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

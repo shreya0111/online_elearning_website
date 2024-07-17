@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% comment %} {% load static %} {% endcomment %}
+{% block title %}Course | {{slugpos.course_title}}{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row my-2">
+        <div class="col-sm-8">
+            {% if video %}
+                <div class="ratio ratio-16x9">
+                    <iframe src="//www.youtube.com/embed/{{video.video_id}}?autoplay=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+            {% endif %}
+                <div class="container-fluid mx-3 my-2">
+                    <h3>{{cc.title}}</h3>
+                    {{cc.article | safe}}
+                </div>
+                <nav aria-label="Page navigation example">
+                <ul class="pagination d-flex justify-content-between">
+                    <li class="page-item">
+                        {% if prev_page %}
+                    <a class="page-link btn btn-primary" href="{% url 'myapp:course_details' slugpos.course_slug prev_page.slug %}" aria-label="Previous">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                    {% endif %}
+                    </li>
+                    <li class="page-item float-end">
+                        {% if next_page %}
+                    <a class="page-link btn btn-primary" href="{% url 'myapp:course_details' slugpos.course_slug next_page.slug %}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                    {% endif %}
+                    </li>
+                </ul>
+</nav>
+        </div>
+        <div class="col-sm-4">
+            <h5>Course: {{slugpos.course_title}}</h5>
+
+            <div class="list-group overflow-auto overflow-x-hidden" style="height:30rem">
+            {% for course in course %}
+            {% url 'myapp:course_details' slugpos.course_slug course.slug as details%}
+                <a type="button" href="{{details}}"
+                    class="list-group-item my-2 shadow p-3 mb-3 bg-white rounded list-group-item-action" {% if request.path == details %}style="color:#0d6efd"{% endif %}>
+                    {{course.title}}
+            </a>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

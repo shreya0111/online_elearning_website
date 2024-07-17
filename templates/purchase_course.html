@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            {% include 'dashboard_sidebar.html' %}
+            
+            <!-- -------------dashboard------------ -->
+            <div class="container" style="width:auto">
+            <div class="row">
+                  {% for premium in premium %}
+                    <div class="col-md-4 shadow my-2">
+                        <div class="product-item">
+                            <div class="position-relative bg-light">
+                                <img class="img-fluid w-100" src="{{premium.course.course_thumbnail.url}}" alt="">
+                            </div>
+                            <div class="text-center p-4">
+                                <h4 class="d-block  mb-2" href="">{{premium.course.course_title}}</h4>
+                                <h6>{{premium.course.course_about}}</h6>
+                                <span class="text-body text-decoration-none">
+                                    {% if premium.status == 'Success' %}
+                                    Already Purchased
+                                {% endif %}
+                                </span>
+                            </div>
+                            <div class="d-flex border-top">
+                                <a href="{% url 'premium:premium_course_overview' premium.course.course_slug %}" class="btn btn-primary text-white w-100">Start Learning</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                <!-- ------dashboard end------- -->
+            </div>
+            </div>
+        </div>
+    </div> 
+
+    
+{% endblock content %}

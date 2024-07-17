@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Course{% endblock title %}
+{% block content %}
+{% if course %}
+<div class="container-fluid my-2">
+  <h5 class="fs-1 text-center">Free Course</h5>
+  <p class="text-center">Free course for all student</p>
+<div class="d-inline-flex flex-wrap mx-auto">
+{% for course in course %}
+<div class="d-flex mx-1 card mt-2 rounded-2x1" style="width: 21rem;">
+  <img src="{{course.course_thumbnail.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{course.course_title}}</h5>
+    <p class="card-text">{{course.course_about}}</p>
+    <a href="{% url 'myapp:cours' course.course_slug %}" class="btn btn-primary text-white">View More</a>
+  </div>
+</div>
+  {% endfor %}
+</div>
+  </div>
+  {% else %}
+  <div class="container">
+    <h5 class="fs-1 text-center my-4">No Course Available!!</h5>
+  </div>
+{% endif %}
+{% endblock content %}
